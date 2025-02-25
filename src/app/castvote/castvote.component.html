@@ -1,0 +1,58 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <p-card>
+        <ng-template pTemplate="header">
+            <h2>Cast Vote</h2>
+        </ng-template>
+        <form #register="ngForm">
+          <div class="container">
+              <div class="row mb-4">
+                  <div class="col vote-textbox">
+                    <input type="text" placeholder="Voter Id" name="Voter_Id" disabled pInputText
+                    [(ngModel)]="vote.voter_id">
+                  </div>
+              </div>
+
+              <div class="row mb-4">
+                  <div class="col vote-textbox">
+                    <input type="text" placeholder="Voter Name" name="Voter_name" disabled pInputText
+                    [(ngModel)]="vote.voter_name">
+                  </div>
+              </div>
+              <div class="row mb-4">
+                  <div class="col vote-textbox">
+                    <p-dropdown [class.is-invalid]="choice?.invalid && choice?.touched" #choice="ngModel"
+                    [options]="candidates_data" [(ngModel)]="vote.voter_choice" name="choice" [required]="true"
+                    placeholder="Select a Candidate" optionLabel="name" optionValue="value"
+                    [showClear]="true"></p-dropdown>
+                    <div *ngIf="(choice?.invalid && choice?.touched) || choice?.dirty">
+                      <small *ngIf="choice.errors?.required" class="text-danger">
+                      Candidate selection is required</small>
+                  </div>
+                  </div>
+              </div>
+          </div>
+      </form>
+        <ng-template pTemplate="footer">
+          <div class="row">
+            <div class="col-md-3 offset-md-4">
+              <p-button label="Vote" icon="pi pi-check" styleClass="vote-button" (onClick)="SubmitVote()"
+              [disabled]="!(register.form.valid) || !(register.dirty)"></p-button>
+            </div>
+          </div>
+        </ng-template>
+    </p-card>
+    </div>
+  </div>
+  <div class="row mt-5" *ngIf="vote_casting_completed">
+    <div class="col-md-6 offset-md-3">
+      <div class="alert alert-success" role="alert" *ngIf="vote_casting_message.result">
+        {{vote_casting_message.message}}
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="!vote_casting_message.result">
+        {{vote_casting_message.message}}
+      </div>
+    </div>
+  </div>
+</div>

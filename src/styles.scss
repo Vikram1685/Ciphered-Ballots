@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+
+.p-inputtext{
+  width: 100% !important;
+}
+
+.p-dropdown {
+  width: 100% !important;
+}
+
+.p-card-header{
+  text-align: center !important;
+  padding-top: 20px;
+}
+
+.p-card{
+  border-radius: 15px !important;
+}
+
+.voter{
+  .p-card{
+    background: #EDBD28 !important;
+  }
+}
+.status{
+  .p-card{
+    background: #c0cbbe !important;
+  }
+}
+
+.candidate{
+  .p-card{
+    background: #e4a3be !important;
+  }
+}
+
+.p-card{
+  background: #f7f3e6 !important;
+}
+
+.p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button {
+  border-radius: 8px !important;
+  width: 100% !important;
+}
+
+.vote-button.p-button{
+    width: 100% !important;
+    border-radius: 20px !important;
+    background-color: #c5b37c;
+    color: black !important;
+    border: 1px solid #c5b37c;
+  }
+

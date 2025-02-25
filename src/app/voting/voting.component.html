@@ -1,0 +1,96 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3 offset-md-4">
+        <p-dropdown id="user" [options]="users" [(ngModel)]="selectedId" optionLabel="name" optionValue="voter_id"
+         placeholder="Select a User" (ngModelChange)="UserSelected()">
+        </p-dropdown>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col voter">
+      <p-card [style]="{width: '360px',height: '250px'}" styleClass="p-card-shadow">
+        <ng-template pTemplate="header">
+          <span>
+            <i class="pi pi-user pi-user " style="font-size: 2rem"></i> <h3>User Details</h3>
+          </span>
+        </ng-template>
+        <div class="ms-5">
+          <div class="row">
+            <div class="col"> <b>Name : {{selectedUser.name}}</b></div>
+          </div>
+          <div class="row">
+            <div class="col"> <b>Email : {{selectedUser.email}}</b></div>
+          </div>
+          <div class="row">
+            <div class="col"> <b>Voter Id : {{selectedUser.voter_id}}</b></div>
+          </div>
+        </div>
+      </p-card>
+    </div>
+    <div class="col status">
+      <p-card [style]="{width: '360px', height: '250px'}" styleClass="p-card-shadow">
+        <ng-template pTemplate="header">
+          <span>
+            <i [ngClass]="(selectedUser.votestatus==false||selectedUser.votestatus===undefined)?'pi pi-times pi-times':'pi pi-check pi-check'"
+             style="font-size: 2rem"></i> <h3>Vote Status</h3>
+          </span>
+        </ng-template>
+        <div>
+          <div class="row text-center">
+            <h4 *ngIf="selectedUser.votestatus===undefined">Not Available</h4>
+            <h4 *ngIf="selectedUser.votestatus">Vote Casted</h4>
+            <h4 *ngIf="selectedUser.votestatus==false">Vote Not Casted</h4>
+          </div>
+        </div>
+      </p-card>
+    </div><div class="col candidate">
+      <p-card [style]="{width: '360px', height: '250px'}" styleClass="p-card-shadow">
+        <ng-template pTemplate="header">
+          <span>
+            <i class="pi pi-users pi-users " style="font-size: 2rem"></i> <h3>Candidates Count</h3>
+          </span>
+        </ng-template>
+        <div>
+          <div class="row text-center">
+            <h4>{{candidates.length}}</h4>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-2 offset-md-3">
+      <button pButton pRipple type="button" label="Vote" class="p-button-success"
+      [disabled]="selectedUser.votestatus || selectedUser.votestatus===undefined"
+      routerLink="/castvote"></button>
+    </div>
+    <div class="col-md-2 offset-md-2">
+      <button pButton pRipple type="button" label="View Vote" class="p-button-success"
+      [disabled]="!selectedUser.votestatus || selectedUser.votestatus===undefined"
+      (click)="ViewVote()"></button>
+    </div>
+  </div>
+  <div class="row mt-5" *ngIf="seeVote">
+    <p-accordion>
+      <p-accordionTab header="Public Key" [selected]="true">
+        <p class="votedata">{{Voterchoice.public_key}}</p>
+      </p-accordionTab>
+      <p-accordionTab header="Encrypted Vote Choice">
+        <h4>Voter Id</h4>
+        <p class="votedata">{{Voterchoice.encrypted.voter_id}}</p>
+        <h4>Voter Name</h4>
+        <p class="votedata">{{Voterchoice.encrypted.voter_name}}</p>
+        <h4>Voter Choice</h4>
+        <p class="votedata">{{Voterchoice.encrypted.voter_choice}}</p>
+      </p-accordionTab>
+      <p-accordionTab header="Decrypted Vote Choice">
+        <h4>Voter Id</h4>
+        <p class="votedata">{{Voterchoice.decrypted.voter_id}}</p>
+        <h4>Voter Name</h4>
+        <p class="votedata">{{Voterchoice.decrypted.voter_name}}</p>
+        <h4>Voter Choice</h4>
+        <p class="votedata">{{Voterchoice.decrypted.voter_choice}}</p>
+      </p-accordionTab>
+  </p-accordion>
+  </div>
+</div>
